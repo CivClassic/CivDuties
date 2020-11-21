@@ -75,10 +75,10 @@ public class ModeManager {
 		UUID worldUUID = UUID.fromString(input.getString("worldUUID"));
 		Bukkit.getScheduler().scheduleSyncDelayedTask(CivDuties.getInstance(), () -> {
 			player.teleport(new Location(Bukkit.getWorld(worldUUID), location [0], location[1], location[2]));
+			// Inform the client the gamemode was changed to fix graphical issues on the client side
+			player.setGameMode(getGameModeByValue(input.getInteger("playerGameType")));
 		}, 3L);
-		// Inform the client the gamemode was changed to fix graphical issues on the
-		// client side
-		player.setGameMode(getGameModeByValue(input.getInteger("playerGameType")));
+		
 
 		CraftPlayer cPlayer = (CraftPlayer) player;
 		cPlayer.getHandle().loadData(input.getRAW());
